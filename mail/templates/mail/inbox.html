@@ -1,0 +1,114 @@
+{% extends "mail/layout.html" %}
+{% load static %}
+{% load mathfilters %}
+
+{% block body %}
+<div class="container-fluid">
+    <div class="row">
+        <div class="d-none d-md-block col-md-3 col-lg-2 ps-0">
+            <div class="d-flex flex-column flex-shrink-0 p-3 bg-light w-100 shadow min-vh-100">
+                <a href="{% url 'index' %}"
+                    class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none mx-auto">
+                    <span class="fs-4 fw-bold">E-Mail</span>
+                </a>
+                <hr>
+                <ul class="list-group list-group-flush justify-content-center">
+                    <li class="list-group-item bg-light">
+                        <a class="inbox"><i class="bi bi-inbox"></i> Inbox</a>
+                    </li>
+                    <li class="list-group-item bg-light">
+                        <a class="compose"><i class="bi bi-pencil-square"></i> Compose</a>
+                    </li>
+                    <li class="list-group-item bg-light">
+                        <a class="sent"><i class="bi bi-send"></i> Sent</a>
+                    </li>
+                    <li class="list-group-item bg-light">
+                        <a class="archived"><i class="bi bi-archive"></i> Archived</a>
+                    </li>
+                    <li class="list-group-item bg-light">
+                        <a class="junk"><i class="bi bi-trash"></i> Junk</a>
+                    </li>
+                </ul>
+                <hr>
+                <div class="text-center">
+                    {% with name_length=request.user.email|length|sub:12|stringformat:"s" %}
+                    {% with email_slice="0:"|add:name_length%}
+                    <span class="fw-bold" id="user">{{ request.user.email|slice:email_slice }}</span>
+                    <span><a class="btn btn-sm btn-custom-blue w-100 mt-3" href="{% url 'logout' %}">Log out</a></span>
+                    {% endwith %}
+                    {% endwith %}
+                </div>
+            </div>
+        </div>
+
+        <div class="d-block d-md-none col ps-0 pe-0">
+            <nav class="navbar navbar-expand-lg navbar-light bg-light px-3">
+                <button class="navbar-toggler me-0" type="button" data-bs-toggle="offcanvas"
+                    data-bs-target="#offcanvas-navbar" aria-controls="offcanvas-navbar">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <h3 class="my-auto mx-auto fw-bold"><a class="text-decoration-none text-black" href="{% url 'index' %}">ALE-Mail</a></h3>
+                <a class="text-decoration-none text-black pe-3 fs-5 compose"><i class="bi bi-pencil-square"></i></a>
+            </nav>
+
+            <div class="offcanvas offcanvas-start w-75" tabindex="-1" id="offcanvas-navbar"
+                aria-labelledby="offcanvas-navbar-label">
+                <div class="offcanvas-header">
+                    <h5 class="offcanvas-title" id="offcanvas-navbar-label"><span class="fw-bold" id="user">{{ request.user.email }}</span></h5>
+                    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"
+                        aria-label="Close"></button>
+                </div>
+                <div class="offcanvas-body ps-0 pb-0">
+                    <ul class="list-group list-group-flush justify-content-center">
+                        <li class="list-group-item">
+                            <a class="inbox"><i class="bi bi-inbox"></i> Inbox</a>
+                        </li>
+                        <li class="list-group-item">
+                            <a class="sent"><i class="bi bi-send"></i> Sent</a>
+                        </li>
+                        <li class="list-group-item">
+                            <a class="archived"><i class="bi bi-archive"></i> Archived</a>
+                        </li>
+                        <li class="list-group-item">
+                            <a class="junk"><i class="bi bi-trash"></i> Junk</a>
+                        </li>
+                    </ul>
+                </div>
+                <hr class="w-100">
+                <div class="mb-5 text-center">
+                    <a class="btn btn-sm btn-custom-blue w-75 mt-3" href="{% url 'logout' %}">Log out</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-9 col-lg-10 p-3">
+            <div id="emails-view">
+            </div>
+
+            <div id="email-view">
+            </div>
+
+            <div id="compose-view">
+                <h3>New Email</h3>
+                <form id="compose-form">
+                    <div class="form-group mb-4">
+                        From: <input disabled class="form-control" value="{{ request.user.email }}">
+                    </div>
+                    <div class="form-group mb-4">
+                        To: <input id="compose-recipients" class="form-control">
+                    </div>
+                    <div class="form-group mb-4">
+                        <input class="form-control" id="compose-subject" placeholder="Subject">
+                    </div>
+                    <textarea class="form-control mb-4" id="compose-body" placeholder="Body"></textarea>
+                    <input type="submit" class="btn btn-custom-blue" />
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block script %}
+<script src="{% static 'mail/inbox.js' %}"></script>
+{% endblock %}

@@ -1,0 +1,56 @@
+{% extends "mail/layout.html" %}
+{% load static %}
+
+{% block style %}
+<link rel="stylesheet" href="{% static 'mail/login.css' %}">
+{% endblock %}
+
+{% block body %}
+
+{% if messages %}
+    {% for message in messages %}
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            {{ message }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    {% endfor %}
+{% endif %}
+
+<div class="container">>
+    <div class="row mt-5 pt-5 justify-content-center">
+        <div class="col-md-10 col-lg-6">
+            <div class="card border-0 p-5 shadow-lg">
+                <div class="card-body">
+                    <div class="mb-5">
+                        <h2 class="fw-bold">Register</h2>
+                        <p class="text-muted">Create your ALE-mail Account to enjoy the service.</p>
+                    </div>
+                    <form class="my-3" action="{% url 'register' %}" method="post">
+                        {% csrf_token %}
+                        <div class="form-group form-floating mb-4">
+                            <input autofocus class="form-control shadow-none" id="email" type="email" name="email"
+                                placeholder="Email" required>
+                            <label for="email">Email</label>
+                        </div>
+                        <div class="form-group form-floating mb-4">
+                            <input class="form-control shadow-none" id="password" type="password" name="password"
+                                placeholder="Password" required>
+                            <label for="password form-control-placeholder">Password</label>
+                        </div>
+                        <div class="form-group form-floating mb-5">
+                            <input class="form-control shadow-none" id="confirmation" type="password"
+                                name="confirmation" placeholder="Confirm Password" required>
+                            <label for="confirmation form-control-placeholder">Confirm Password</label>
+                        </div>
+                        <input class="btn btn-custom-blue shadow-none w-100 mt-3" type="submit" value="Register">
+                    </form>
+
+                    <div class="card-footer bg-white border-0 text-center">
+                        Already have an account? <a href="{% url 'login' %}">Log In here.</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div 
+{% endblock %}

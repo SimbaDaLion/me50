@@ -1,0 +1,24 @@
+.form-control {
+    border: none;
+    border-radius: 0;
+    border-bottom: 2px solid #D3D3D3;
+} 
+
+.form-control:focus-within {
+    border-bottom: 2px solid #105481;
+}
+
+label {
+    color: grey;
+    position: absolute;
+}
+
+input:not(:placeholder-shown) + label {
+    color: #105481;
+    top: -8px !important;
+}
+
+input:focus + label {
+    color: #105481;
+    top: -8px !important;
+}

@@ -1,0 +1,119 @@
+/* html, body {
+    height: 100%;
+} */
+
+textarea {
+    min-height: 400px;
+}
+
+.list-group li {
+    border: 0;
+}
+
+.list-group li a {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.list-group li i {
+    color: black;
+    font-size: 16px;
+    margin-right: 10px;
+}
+
+.btn-custom-blue {
+    color: white;
+    background-color: #116094;
+    border-color: #116094;
+}
+
+.btn-custom-blue:hover {
+    color: white;
+    background-color: #105b8d;
+    border-color: #105b8d;
+}
+
+/* mailbox */
+.email {
+    position: relative;
+    border-bottom: 1px solid rgb(220, 220, 220);
+}
+
+.read {
+    background-color: rgb(248, 248, 248);
+}
+
+.unread {
+    background-color: white;
+}
+
+.email:hover {
+    box-shadow: 0px 0px 2px rgb(205, 205, 205);
+}
+
+.emails-btn-groups {
+    display: none;
+}
+
+@media screen and (min-width: 768px) {
+    .emails-btn-groups {
+        display: flex;
+        justify-self: flex-end;
+    }
+    
+    .emails-btn-groups > * {
+        display: none;
+        border: 0;
+        border-radius: 50%;
+        font-size: 20px;
+        background-color: white;
+        color: black;
+        margin: 0 8px;
+    }
+    
+    .email:hover .emails-archieve-btn, .email:hover .emails-junk-btn {
+        display: inline-block;
+    }
+    
+    .emails-archieve-btn:hover , .emails-junk-btn:hover {
+        border: 0;
+        background-color: #e3e3e3;
+        color: black;
+        box-shadow: 0px 0px 2px rgb(122, 122, 122);
+    }
+}
+
+/* view email */
+.email-view h3 {
+    padding-left: 10px;    
+}
+
+.email-info {
+    padding-left: 5px;
+    display: flex;
+    flex-direction: column;
+}
+
+.email-info > * {
+    margin: 5px 0;
+}
+
+.email-body {
+    margin-top: 50px;
+    margin-bottom: 50px;
+    padding-left: 20px;
+}
+
+
+#email-view .btns-display > * {
+    border: 0;
+    margin: 0 10px;
+    padding: 10px;
+    width: 90px;
+    border-radius: 3vw;
+}
+
+.btns-display .reply-btn:hover, .btns-display .archive-btn:hover, .btns-display .junk-btn:hover {
+    background-color: #e3e3e3;
+}
